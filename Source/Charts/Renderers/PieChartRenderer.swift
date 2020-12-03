@@ -638,17 +638,30 @@ open class PieChartRenderer: DataRenderer
 
                     // draw the transparent-circle
                     context.beginPath()
-                    context.addEllipse(in: CGRect(
-                        x: center.x - secondHoleRadius,
-                        y: center.y - secondHoleRadius,
-                        width: secondHoleRadius * 2.0,
-                        height: secondHoleRadius * 2.0))
+//                    context.addEllipse(in: CGRect(
+//                        x: center.x - secondHoleRadius,
+//                        y: center.y - secondHoleRadius,
+//                        width: secondHoleRadius * 2.0,
+//                        height: secondHoleRadius * 2.0))
                     context.addEllipse(in: CGRect(
                         x: center.x - holeRadius,
                         y: center.y - holeRadius,
                         width: holeRadius * 2.0,
                         height: holeRadius * 2.0))
                     context.fillPath(using: .evenOdd)
+                    
+                    let startAngle: CGFloat = 0
+                    let endAngle: CGFloat = 2 * .pi
+                    let path = UIBezierPath(
+                      arcCenter: center,
+                      radius: radius - 60/2,
+                      startAngle: startAngle,
+                      endAngle: endAngle,
+                      clockwise: true)
+
+                    path.lineWidth = 60
+                    chart.transparentCircleColor?.setStroke()
+                    path.stroke()
                 }
             }
 
